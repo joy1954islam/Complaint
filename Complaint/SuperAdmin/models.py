@@ -10,15 +10,11 @@ from django.urls import reverse
 
 
 class Ministry(models.Model):
-    MinistryName = models.CharField(max_length=100)
-    MinisterName = models.CharField(max_length=100)
-    Email = models.EmailField()
-    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-
-    class Meta:
-        db_table = "ministry"
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ministry_name = models.CharField(max_length=100, verbose_name='Ministry Name')
+    minister_name = models.CharField(max_length=100, verbose_name='Minister Name')
+    email = models.EmailField(verbose_name='Email')
 
     def __str__(self):
-        return self.MinistryNam
-
+        return self.ministry_name
 

@@ -15,7 +15,8 @@ class Activation(models.Model):
 
 class User(AbstractUser):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    MinistryName = models.ForeignKey(Ministry, on_delete=models.CASCADE, blank=True, null=True)
+    ministry_name = models.ForeignKey(Ministry, on_delete=models.CASCADE, blank=True, null=True,
+                                      verbose_name='Ministry Name')
     is_ministry_incharge = models.BooleanField(default=False)
     is_uno = models.BooleanField(default=False)
     is_public_user = models.BooleanField(default=False)
