@@ -3,13 +3,11 @@
     <ul>
           <li class="active"><a href="{% url 'index' %}">Home</a></li>
           <li class="drop-down"><a href="">Complaint</a>
-
                 <ul>
                     {% for ministry in ministry %}
                       <li><a href="#">{{ ministry.ministry_name }}</a></li>
                     {% endfor %}
                 </ul>
-
           </li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
