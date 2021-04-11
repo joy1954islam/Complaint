@@ -1,11 +1,27 @@
 from django.shortcuts import render
 from SuperAdmin.models import Ministry
-# Create your views here.
+from .models import *
+from .forms import *
 
 
-def navbar(request):
-    ministry = Ministry.obects.all()
-    context = {
-        'ministry': ministry
-    }
-    return render(request, 'nav.html', context=context)
+def create_complaint(request, complaint_id):
+    complaint = Ministry.objects.get(id=complaint_id)
+    form = ComplaintForms(instance=complaint)
+    if request.method == "POST":
+        form = ComplaintForms(request.POST or None, request.FILES or None, instance=complaint)
+        if form.is_valid():
+            c = form.save(commit=False)
+            c.username = request.user
+            c.ministry_name = complaint
+            c.save()
+        context ={
+            'form': form,
+            'complaint': complaint
+        }
+        return render(request, 'create_complaint.html', context=context)
+    if request.method == "GET":
+        context = {
+            'form': form,
+            'complaint': complaint
+        }
+        return render(request, 'create_complaint.html', context=context)

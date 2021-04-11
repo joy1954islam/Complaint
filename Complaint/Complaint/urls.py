@@ -23,7 +23,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts import views as account_views
-
+from public_user import views as public_user
 
 urlpatterns = [
 
@@ -31,6 +31,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('super/admin/', include('SuperAdmin.urls')),
+
+    path('complaint/<int:complaint_id>/', public_user.create_complaint, name='create_complaint'),
 
 ]
 if settings.DEBUG:

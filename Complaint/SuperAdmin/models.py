@@ -16,5 +16,4 @@ class Ministry(models.Model):
     email = models.EmailField(verbose_name='Email')
 
     def __str__(self):
-        return self.ministry_name
-
+        return f'{self.ministry_name}'

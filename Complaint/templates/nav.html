@@ -5,7 +5,7 @@
           <li class="drop-down"><a href="">Complaint</a>
                 <ul>
                     {% for ministry in ministry %}
-                      <li><a href="#">{{ ministry.ministry_name }}</a></li>
+                      <li><a href="{% url 'create_complaint' ministry.id %}">{{ ministry.ministry_name }}</a></li>
                     {% endfor %}
                 </ul>
           </li>
