@@ -2,6 +2,7 @@ from django.shortcuts import render
 from SuperAdmin.models import Ministry
 from .models import *
 from .forms import *
+from django.shortcuts import render, redirect, reverse
 
 
 def create_complaint(request, complaint_id):
@@ -12,11 +13,10 @@ def create_complaint(request, complaint_id):
         if form.is_valid():
             c = form.save(commit=False)
             c.username = request.user
-            c.ministry_name = complaint
             c.save()
+            return redirect(reverse('home'))
         context = {
             'form': form,
-            'complaint': complaint
         }
         return render(request, 'create_complaint.html', context=context)
     if request.method == "GET":

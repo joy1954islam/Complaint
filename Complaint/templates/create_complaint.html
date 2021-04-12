@@ -5,17 +5,12 @@
 <br>
 <br>
 <br>
-<form method="post" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
+    <div class="modal-header">
+     <h4 class="modal-title">Create a Complaint For {{ form.ministry_name }}</h4>
+  </div>
   {% csrf_token %}
-  <div class="modal-header">
-     <h4 class="modal-title">Create a Complaint For {{ complaint.ministry_name }}</h4>
-
-  </div>
-  <div class="modal-body">
-    {{ form|crispy }}
-  </div>
-  <div class="modal-footer">
+  {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Create Complaint</button>
-  </div>
 </form>
 {% endblock content %}

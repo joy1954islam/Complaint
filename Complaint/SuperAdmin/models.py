@@ -1,10 +1,5 @@
-from django.db import models
-
-# Create your models here.
 from django.conf import settings
 from django.contrib import auth
-
-
 from django.db import models
 from django.urls import reverse
 
@@ -16,4 +11,4 @@ class Ministry(models.Model):
     email = models.EmailField(verbose_name='Email')
 
     def __str__(self):
-        return f'{self.ministry_name}'
+        return str(self.ministry_name)

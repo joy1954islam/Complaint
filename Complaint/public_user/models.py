@@ -11,4 +11,4 @@ class Complaint(models.Model):
     note = models.TextField(verbose_name='Note')
 
     def __str__(self):
-        return self.location
+        return str(self.username.username)
