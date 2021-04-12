@@ -14,7 +14,7 @@ def create_complaint(request, complaint_id):
             c.username = request.user
             c.ministry_name = complaint
             c.save()
-        context ={
+        context = {
             'form': form,
             'complaint': complaint
         }

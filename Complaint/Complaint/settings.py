@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'SuperAdmin',
     'public_user.apps.PublicUserConfig',
+    'ministry_incharge.apps.MinistryInchargeConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
