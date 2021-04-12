@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('super/admin/', include('SuperAdmin.urls')),
+    path('ministry/incharge/', include('ministry_incharge.urls')),
 
     path('complaint/<int:complaint_id>/', public_user.create_complaint, name='create_complaint'),
 
