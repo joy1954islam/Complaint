@@ -7,7 +7,7 @@ def ministry_incharge_home(request):
 
 
 def complaint_list(request):
-    complaint = Complaint.objects.all()
+    complaint = Complaint.objects.filter(ministry_name=request.user.ministry_name)
     context = {
         'complaint': complaint
     }

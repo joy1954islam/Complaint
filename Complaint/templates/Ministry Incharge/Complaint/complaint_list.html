@@ -33,7 +33,9 @@
                                         <td>{{ complaint.username }}</td>
                                         <td>{{ complaint.ministry_name}}</td>
                                         <td>{{ complaint.location }}</td>
-                                        <td>{{ complaint.image }}</td>
+                                        <td>
+                                            <img src="{{ complaint.image.url }}" height="50" width="50">
+                                        </td>
                                         <td>{{ complaint.note }}</td>
                                       </tr>
                                     {% empty %}
