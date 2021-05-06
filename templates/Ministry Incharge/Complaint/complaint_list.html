@@ -24,6 +24,8 @@
                                     <th>C. Location</th>
                                     <th>C. Image</th>
                                     <th>C. Note</th>
+                                    <th>Status Complaint</th>
+                                    <th>Change Status Complaint</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,6 +39,15 @@
                                             <img src="{{ complaint.image.url }}" height="50" width="50">
                                         </td>
                                         <td>{{ complaint.note }}</td>
+                                        <td>{{ complaint.is_approved_status }}</td>
+                                        <td>
+                                            {% if complaint.is_approved_status %}
+                                              Already Approved
+                                            {% else %}
+                                            <a href="{% url 'ministry_incharge_approved_complaint' complaint.id %}" class="btn btn-primary"> Approved Complaint</a>
+                                            {% endif %}
+
+                                        </td>
                                       </tr>
                                     {% empty %}
                                       <tr>

@@ -9,6 +9,7 @@ class Complaint(models.Model):
     location = models.TextField(verbose_name='Location')
     image = models.ImageField(verbose_name='Location Image')
     note = models.TextField(verbose_name='Note')
+    is_approved_status = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.username.username)
