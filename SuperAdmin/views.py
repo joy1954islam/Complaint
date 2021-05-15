@@ -67,10 +67,6 @@ def ministry_create(request):
             m.username = request.user
             m.save()
             return redirect(reverse('ministry_list'))
-        context = {
-            'form': form
-        }
-        return render(request, 'SuperAdmin/Ministry/partial_ministry_create.html', context=context)
     if request.method == "GET":
         form = MinistryForm()
         context = {
@@ -86,10 +82,6 @@ def ministry_update(request, pk):
         if form.is_valid():
             form.save()
             return redirect(reverse('ministry_list'))
-        context = {
-            'form': form
-        }
-        return render(request, 'SuperAdmin/Ministry/partial_ministry_update.html', context=context)
     else:
         form = MinistryForm(instance=ministry)
         context = {
