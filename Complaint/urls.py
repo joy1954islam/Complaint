@@ -36,6 +36,7 @@ urlpatterns = [
     path('complaint/<int:complaint_id>/', public_user.create_complaint, name='create_complaint'),
 
     path('about/', public_user.about, name='about'),
+    path('service/', public_user.service, name='service'),
 
 ]
 if settings.DEBUG:

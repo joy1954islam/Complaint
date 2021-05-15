@@ -28,3 +28,7 @@ def create_complaint(request, complaint_id):
 
 def about(request):
     return render(request, 'about.html')
+
+
+def service(request):
+    return render(request, 'service.html')
