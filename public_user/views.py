@@ -17,11 +17,6 @@ def create_complaint(request, complaint_id):
             c.ministry_name = complaint
             c.save()
             return redirect(reverse('home'))
-        context = {
-            'form': form,
-            'complaint': complaint
-        }
-        return render(request, 'create_complaint.html', context=context)
 
     if request.method == "GET":
         context = {
@@ -29,3 +24,7 @@ def create_complaint(request, complaint_id):
             'complaint': complaint
         }
         return render(request, 'create_complaint.html', context=context)
+
+
+def about(request):
+    return render(request, 'about.html')

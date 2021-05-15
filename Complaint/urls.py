@@ -35,6 +35,8 @@ urlpatterns = [
 
     path('complaint/<int:complaint_id>/', public_user.create_complaint, name='create_complaint'),
 
+    path('about/', public_user.about, name='about'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

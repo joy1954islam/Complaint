@@ -16,7 +16,7 @@ def send_mail(to, template, context):
 
 def send_email_to_complaint_approved(ministry_name, email):
     context = {
-        'subject': str(ministry_name) + ' Complaint Approved',
+        'subject': 'Approved ' + str(ministry_name) + ' Complaint',
     }
     print(context)
     send_mail(email, 'complaint_email', context)
