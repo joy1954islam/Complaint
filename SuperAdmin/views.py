@@ -28,9 +28,12 @@ User = get_user_model()
 
 
 def SuperAdminHome(request):
-    student_count = User.objects.all()
+    user = User.objects.all()
+    complaint_problem = Ministry.objects.all().count()
+    ministry_incharge = user.filter(is_ministry_incharge=True).count()
     context = {
-
+        'ministry_incharge': ministry_incharge,
+        'complaint_problem': complaint_problem,
     }
     return render(request, 'SuperAdmin/Home.html', context)
 
