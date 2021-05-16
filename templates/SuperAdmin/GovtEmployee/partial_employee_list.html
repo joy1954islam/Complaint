@@ -1,6 +1,6 @@
 {% for employee in employees %}
       <tr>
-          <td>{{ employee.id }}</td>
+          <td>{{ forloop.counter }}</td>
           <td>{{ employee.username}}</td>
           <td>{{ employee.first_name }}</td>
           <td>{{ employee.last_name }}</td>
@@ -22,6 +22,6 @@
 
         {% empty %}
         <tr>
-            <td colspan="8" class="text-center bg-warning">No employee</td>
+            <td colspan="8" class="text-center bg-warning">No Ministry Incharge</td>
         </tr>
 {% endfor %}
