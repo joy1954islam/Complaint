@@ -20,3 +20,17 @@ def send_email_to_complaint_approved(ministry_name, email):
     }
     print(context)
     send_mail(email, 'complaint_email', context)
+
+
+def send_email_to_complaint_next_steps(complaint, ministry_name, email_or_start_date, email, location, note, image):
+    context = {
+        'subject': 'Your Complaint Update ' + str(ministry_name) + ' Complaint',
+        'complaint_name': complaint,
+        'ministry_name': ministry_name,
+        'email_or_start_date': email_or_start_date,
+        'email': email,
+        'location': location,
+        'note': note,
+        'image': image,
+    }
+    send_mail(email_or_start_date, 'complaint_to_thana', context)

@@ -26,6 +26,7 @@
                                     <th>C. Note</th>
                                     <th>Status Complaint</th>
                                     <th>Change Status Complaint</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +47,13 @@
                                             {% else %}
                                             <a href="{% url 'ministry_incharge_approved_complaint' complaint.id %}" class="btn btn-primary"> Approved Complaint</a>
                                             {% endif %}
-
+                                        </td>
+                                        <td>
+                                            {% if complaint.is_next_update_status %}
+                                              Already Done
+                                            {% else %}
+                                            <a href="{% url 'ministry_incharge_next_update_complaint_form' complaint.id %}" class="btn btn-primary">Update Complaint</a>
+                                            {% endif %}
                                         </td>
                                       </tr>
                                     {% empty %}
