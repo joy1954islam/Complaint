@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 # Create your views here.
-from .forms import MinistryForm, GovtSignUpForm, GovtSignUpUpdateForm, DistrictForm, PoliceStationForm
+from .forms import MinistryForm, GovtSignUpForm, GovtSignUpUpdateForm, DistrictForm, PoliceStationForm, UNOSignUpForm, UnoSignUpUpdateForm
 from .models import Ministry, District, PoliceStation
 from django.shortcuts import render
 from accounts.forms import UserUpdateForm, ChangeEmailForm
@@ -358,3 +358,88 @@ def police_delete(request, pk):
     }
     return render(request, 'SuperAdmin/Police/partial_police_delete.html', context=context)
 
+
+class UnoSignUpView(FormView):
+    template_name = 'SuperAdmin/Uno/partial_uno_create.html'
+    form_class = UNOSignUpForm
+
+    def form_valid(self, form):
+        request = self.request
+        user = form.save(commit=False)
+
+        if settings.DISABLE_USERNAME:
+            # Set a temporary username
+            user.username = get_random_string()
+        else:
+            user.username = form.cleaned_data['username']
+
+        if settings.ENABLE_USER_ACTIVATION:
+            user.is_active = False
+
+        # Create a user record
+        user.save()
+
+        # Change the username to the "user_ID" form
+        if settings.DISABLE_USERNAME:
+            user.username = f'user_{user.id}'
+            user.save()
+
+        if settings.ENABLE_USER_ACTIVATION:
+            code = get_random_string(20)
+
+            act = Activation()
+            act.code = code
+            act.user = user
+            act.save()
+
+            send_activation_email(request, user.email, code)
+
+            messages.success(request, f'Account is Created and You are signed up. To activate the account, follow the '
+                                      f'link sent to the mail.')
+        else:
+            raw_password = form.cleaned_data['password1']
+
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            messages.success(request, f'You are successfully signed up!')
+
+        return redirect('uno_list')
+
+
+def uno_list(request):
+    uno = User.objects.all().filter(is_uno=True)
+    context = {
+        'uno': uno,
+    }
+    return render(request, 'SuperAdmin/Uno/uno_list.html', context)
+
+
+def uno_update(request, pk):
+    uno = get_object_or_404(User, pk=pk)
+    form = UnoSignUpUpdateForm(request.POST or None, request.FILES or None, instance=uno)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "User Updated Successfully")
+        return redirect("uno_list")
+    # else:
+    #     messages.error(request, "Training Not Updated Successfully")
+    return render(request, 'SuperAdmin/Uno/partial_unp_update.html', {'form': form})
+
+
+def uno_delete(request, pk):
+    uno = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        uno.delete()
+        return redirect(reverse("uno_list"))
+    context = {
+        'uno': uno
+    }
+    return render(request, 'SuperAdmin/Uno/partial_uno_delete.html', context=context)
+
+
+def uno_view(request, pk):
+    uno = get_object_or_404(User, pk=pk)
+    context = {
+        'uno': uno
+    }
+    return render(request, 'SuperAdmin/Uno/partial_uno_view.html', context=context)

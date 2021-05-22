@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
 from django.contrib.auth.models import User
-from SuperAdmin.models import Ministry
+from SuperAdmin.models import Ministry, District, PoliceStation
 
 
 class Activation(models.Model):
@@ -17,6 +17,8 @@ class User(AbstractUser):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     ministry_name = models.ForeignKey(Ministry, on_delete=models.CASCADE, blank=True, null=True,
                                       verbose_name='Ministry Name')
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+    police_station = models.ForeignKey(PoliceStation, on_delete=models.CASCADE)
     is_ministry_incharge = models.BooleanField(default=False)
     is_uno = models.BooleanField(default=False)
     is_public_user = models.BooleanField(default=False)

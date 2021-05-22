@@ -32,4 +32,10 @@ urlpatterns = [
     path('change/email/', views.ChangeEmailView.as_view(), name='SuperAdmin_change_email'),
     path('change/email/<code>/', views.ChangeEmailActivateView.as_view(), name='change_email_activation'),
 
+    path('uno/', views.uno_list, name='uno_list'),
+    path('uno/create/', views.UnoSignUpView.as_view(), name='uno_create'),
+    path('<int:pk>/uno/update/', views.uno_update, name='uno_update'),
+    path('<int:pk>/uno/delete/', views.uno_delete, name='uno_delete'),
+    path('<int:pk>/uno/view/', views.uno_view, name='uno_view'),
+
 ]

@@ -55,6 +55,12 @@ class GovtSignUpUpdateForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'ministry_name']
 
 
+class UnoSignUpUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'district', 'police_station', 'first_name', 'last_name', 'email', 'ministry_name']
+
+
 class DistrictForm(forms.ModelForm):
     class Meta:
         model = District
@@ -65,3 +71,27 @@ class PoliceStationForm(forms.ModelForm):
     class Meta:
         model = PoliceStation
         fields = ['district', 'police_station', 'email']
+
+
+class UNOSignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'district', 'police_station', 'email', 'ministry_name', 'password1', 'password2']
+
+    email = forms.EmailField(label=_('Email'), help_text=_('Required. Enter an existing email address.'))
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_uno = True
+        if commit:
+            user.save()
+        return user
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        user = User.objects.filter(email__iexact=email).exists()
+        if user:
+            raise ValidationError(_('You can not use this email address.'))
+
+        return email
