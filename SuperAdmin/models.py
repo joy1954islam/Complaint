@@ -14,6 +14,7 @@ class District(models.Model):
 class PoliceStation(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     police_station = models.CharField(max_length=200)
+    email = models.EmailField()
 
     def __str__(self):
         return self.police_station
