@@ -44,6 +44,8 @@ def home(request):
             return redirect('SuperAdminHome')
         if request.user.is_ministry_incharge:
             return redirect('ministry_incharge_home')
+        if request.user.is_uno:
+            return redirect('ministry_incharge_home')
 
     return HttpResponse("login failed")
 
