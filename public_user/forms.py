@@ -6,6 +6,7 @@ class ComplaintForms(forms.ModelForm):
 
     class Meta:
         model = Complaint
+        # fields = ['district', 'police_station', 'location', 'image', 'note']
         fields = ['location', 'image', 'note']
 
 

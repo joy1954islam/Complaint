@@ -3,8 +3,10 @@ from SuperAdmin.models import Ministry
 from .models import *
 from .forms import *
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='log_in')
 def create_complaint(request, complaint_id):
     complaint = Ministry.objects.get(id=complaint_id)
     form = ComplaintForms(instance=complaint)
