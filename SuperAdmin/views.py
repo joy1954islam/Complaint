@@ -311,3 +311,50 @@ def district_delete(request, pk):
     }
     return render(request, 'SuperAdmin/District/partial_district_delete.html', context=context)
 
+
+def police_list(request):
+    police = PoliceStation.objects.all()
+    context = {
+        'police': police
+    }
+    return render(request, 'SuperAdmin/Police/police_list.html', context=context)
+
+
+def police_create(request):
+    form = PoliceStationForm()
+    if request.method == 'POST':
+        form = PoliceStationForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('police_list'))
+    context = {
+        'form': form
+    }
+    return render(request, 'SuperAdmin/Police/partial_police_create.html', context=context)
+
+
+def police_update(request, pk):
+    police = get_object_or_404(PoliceStation, pk=pk)
+    if request.method == 'POST':
+        form = PoliceStationForm(request.POST or None, instance=police)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('police_list'))
+    else:
+        form = PoliceStationForm(instance=police)
+        context = {
+            'form': form
+        }
+        return render(request, 'SuperAdmin/Police/partial_police_update.html', context=context)
+
+
+def police_delete(request, pk):
+    police = get_object_or_404(PoliceStation, pk=pk)
+    if request.method == 'POST':
+        police.delete()
+        return redirect(reverse('police_list'))
+    context = {
+        'police': police
+    }
+    return render(request, 'SuperAdmin/Police/partial_police_delete.html', context=context)
+

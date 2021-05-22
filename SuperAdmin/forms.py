@@ -64,4 +64,4 @@ class DistrictForm(forms.ModelForm):
 class PoliceStationForm(forms.ModelForm):
     class Meta:
         model = PoliceStation
-        fields = ['district', 'police_station']
+        fields = ['district', 'police_station', 'email']

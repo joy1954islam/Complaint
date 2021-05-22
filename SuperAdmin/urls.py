@@ -17,6 +17,11 @@ urlpatterns = [
     path('<int:pk>/district/update/', views.district_update, name='district_update'),
     path('<int:pk>/district/delete/', views.district_delete, name='district_delete'),
 
+    path('police/', views.police_list, name='police_list'),
+    path('police/create/', views.police_create, name='police_create'),
+    path('<int:pk>/police/update/', views.police_update, name='police_update'),
+    path('<int:pk>/police/delete/', views.police_delete, name='police_delete'),
+
     path('employee/', views.employee_list, name='employee_list'),
     path('employee/create/', views.GovtSignUpView.as_view(), name='employee_create'),
     path('<int:pk>/employee/update/', views.employee_update, name='employee_update'),
