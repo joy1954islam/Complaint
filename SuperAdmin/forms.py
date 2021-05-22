@@ -7,7 +7,7 @@ from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
-from .models import Ministry
+from .models import Ministry, District, PoliceStation
 
 User = get_user_model()
 
@@ -53,3 +53,15 @@ class GovtSignUpUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'ministry_name']
+
+
+class DistrictForm(forms.ModelForm):
+    class Meta:
+        model = District
+        fields = ['district']
+
+
+class PoliceStationForm(forms.ModelForm):
+    class Meta:
+        model = PoliceStation
+        fields = ['district', 'police_station']
