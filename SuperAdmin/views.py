@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 # Create your views here.
-from .forms import MinistryForm, GovtSignUpForm, GovtSignUpUpdateForm
-from .models import Ministry
+from .forms import MinistryForm, GovtSignUpForm, GovtSignUpUpdateForm, DistrictForm, PoliceStationForm
+from .models import Ministry, District, PoliceStation
 from django.shortcuts import render
 from accounts.forms import UserUpdateForm, ChangeEmailForm
 from django.views.generic import View, FormView
@@ -265,5 +265,49 @@ class ChangePasswordView(BasePasswordChangeView):
         return redirect('log_in')
 
 
+def district_list(request):
+    district = District.objects.all()
+    context = {
+        'district': district
+    }
+    return render(request, 'SuperAdmin/District/district_list.html', context=context)
 
+
+def district_create(request):
+    form = DistrictForm()
+    if request.method == 'POST':
+        form = DistrictForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('district_list'))
+    context = {
+        'form': form
+    }
+    return render(request, 'SuperAdmin/District/partial_district_create.html', context=context)
+
+
+def district_update(request, pk):
+    district = get_object_or_404(District, pk=pk)
+    if request.method == 'POST':
+        form = DistrictForm(request.POST or None, instance=district)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('district_list'))
+    else:
+        form = DistrictForm(instance=district)
+        context = {
+            'form': form
+        }
+        return render(request, 'SuperAdmin/District/partial_district_update.html', context=context)
+
+
+def district_delete(request, pk):
+    district = get_object_or_404(District, pk=pk)
+    if request.method == 'POST':
+        district.delete()
+        return redirect(reverse('district_list'))
+    context = {
+        'district': district
+    }
+    return render(request, 'SuperAdmin/District/partial_district_delete.html', context=context)
 

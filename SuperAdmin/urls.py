@@ -12,6 +12,11 @@ urlpatterns = [
     path('<int:pk>/ministry/update/', views.ministry_update, name='ministry_update'),
     path('<int:pk>/ministry/delete/', views.ministry_delete, name='ministry_delete'),
 
+    path('district/', views.district_list, name='district_list'),
+    path('district/create/', views.district_create, name='district_create'),
+    path('<int:pk>/district/update/', views.district_update, name='district_update'),
+    path('<int:pk>/district/delete/', views.district_delete, name='district_delete'),
+
     path('employee/', views.employee_list, name='employee_list'),
     path('employee/create/', views.GovtSignUpView.as_view(), name='employee_create'),
     path('<int:pk>/employee/update/', views.employee_update, name='employee_update'),
