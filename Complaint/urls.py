@@ -35,6 +35,12 @@ urlpatterns = [
 
     path('complaint/<int:complaint_id>/', public_user.create_complaint, name='create_complaint'),
 
+    path('profile/', public_user.public_incharge_profile, name='public_profile'),
+    path('change/password/', public_user.PublicChangePasswordView.as_view(), name='public_change_password'),
+    path('change/email/', public_user.PublicChangeEmailView.as_view(), name='public_change_email'),
+    path('change/email/<code>/', public_user.PublicChangeEmailActivateView.as_view(),
+         name='public_change_email_activation'),
+
     path('about/', public_user.about, name='about'),
     path('service/', public_user.service, name='service'),
 

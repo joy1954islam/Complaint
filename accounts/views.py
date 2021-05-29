@@ -46,8 +46,10 @@ def home(request):
             return redirect('ministry_incharge_home')
         if request.user.is_uno:
             return redirect('ministry_incharge_home')
+        if request.user.is_public_user:
+            return redirect('index')
 
-    return HttpResponse("login failed")
+    return redirect('index')
 
 
 def doctor_home_page(request):
