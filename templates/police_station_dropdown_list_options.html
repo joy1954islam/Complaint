@@ -1,0 +1,10 @@
+{% load static %}
+<style>
+        #id_city {
+            width: 100%;
+        }
+    </style>
+<option value="">---------</option>
+{% for police_station in police_station %}
+<option value="{{ police_station.pk }}">{{ police_station.police_station }}</option>
+{% endfor %}

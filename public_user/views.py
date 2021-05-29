@@ -24,7 +24,7 @@ from django.contrib import messages
 @login_required(login_url='log_in')
 def create_complaint(request, complaint_id):
     complaint = Ministry.objects.get(id=complaint_id)
-    form = ComplaintForms(instance=complaint)
+    form = ComplaintForms()
     if request.method == "POST":
         form = ComplaintForms(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -41,6 +41,14 @@ def create_complaint(request, complaint_id):
             'complaint': complaint
         }
         return render(request, 'create_complaint.html', context=context)
+
+
+def load_police(request):
+    district_id = request.GET.get('district')
+    print(district_id)
+    police_station = PoliceStation.objects.filter(district_id=district_id).all()
+    print(police_station)
+    return render(request, 'police_station_dropdown_list_options.html', {'police_station': police_station})
 
 
 def about(request):

@@ -5,7 +5,7 @@
 <br>
 <br>
 <br>
-<form method="POST" enctype="multipart/form-data" action="{% url 'create_complaint' complaint.id %}">
+<form method="POST" enctype="multipart/form-data" action="{% url 'create_complaint' complaint.id %}" id="personForm" data-police-station-url="{% url 'ajax_load_police_station' %}" novalidate>
     <div class="modal-header">
      <h4 class="modal-title">Create a Complaint For {{ complaint.ministry_name }}</h4>
   </div>
@@ -13,4 +13,22 @@
   {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Create Complaint</button>
 </form>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_district").change(function () {
+      var url = $("#personForm").attr("data-police-station-url");
+      var districtId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'district': districtId
+        },
+        success: function (data) {
+          $("#id_police_station").html(data);
+        }
+      });
+
+    });
+  </script>
 {% endblock content %}

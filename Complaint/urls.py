@@ -40,6 +40,7 @@ urlpatterns = [
     path('change/email/', public_user.PublicChangeEmailView.as_view(), name='public_change_email'),
     path('change/email/<code>/', public_user.PublicChangeEmailActivateView.as_view(),
          name='public_change_email_activation'),
+    path('ajax/load-police-station/', public_user.load_police, name='ajax_load_police_station'),
 
     path('about/', public_user.about, name='about'),
     path('service/', public_user.service, name='service'),
