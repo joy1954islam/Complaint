@@ -11,4 +11,9 @@ urlpatterns = [
          views.ministry_incharge_next_update_complaint_form,
          name='ministry_incharge_next_update_complaint_form'),
 
+    path('profile/', views.ministry_incharge_profile, name='ministry_incharge_profile'),
+    path('change/password/', views.MinistryChangePasswordView.as_view(), name='ministry_change_password'),
+    path('change/email/', views.MinistryChangeEmailView.as_view(), name='ministry_change_email'),
+    path('change/email/<code>/', views.MinistryChangeEmailActivateView.as_view(),
+         name='ministry_change_email_activation'),
 ]
