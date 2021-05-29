@@ -21,6 +21,14 @@ from accounts.utils import (
 from django.contrib import messages
 
 
+def my_complaint_list(request):
+    complaint = Complaint.objects.filter(username=request.user)
+    context = {
+        'complaint': complaint
+    }
+    return render(request, 'my_complaint_list.html', context=context)
+
+
 @login_required(login_url='log_in')
 def create_complaint(request, complaint_id):
     complaint = Ministry.objects.get(id=complaint_id)

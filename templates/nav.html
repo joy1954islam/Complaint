@@ -19,6 +19,7 @@
             <li><a href="{% url 'ministry_incharge_home'%}">My Dashboard</a></li>
             <li><a href="{% url 'log_out'%}">Log out</a></li>
           {% elif request.user.is_authenticated and request.user.is_public_user %}
+            <li><a href="{% url 'my_complaint' %}">My Complaint List</a></li>
             <li><a href="{% url 'public_change_password' %}">Change Password</a></li>
             <li><a href="{% url 'public_change_email' %}">Change Email</a></li>
             <li><a href="{% url 'public_profile' %}">Profile</a></li>
