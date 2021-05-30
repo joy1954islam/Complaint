@@ -23,7 +23,7 @@
             <div class="col-md-5">
                 <div class="row">
                     <div class="col-md-12 form-group">
-                        <form method="POST">
+                        <form method="POST" id="personForm" data-police-station-url="{% url 'ajax_load_police_station' %}" novalidate>
                              {% csrf_token %}
                              {{ form|crispy }}
 
@@ -43,6 +43,24 @@
 <br>
 <br>
 <br>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_district").change(function () {
+      var url = $("#personForm").attr("data-police-station-url");
+      var districtId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'district': districtId
+        },
+        success: function (data) {
+          $("#id_police_station").html(data);
+        }
+      });
+
+    });
+  </script>
 
 
 {% endblock %}

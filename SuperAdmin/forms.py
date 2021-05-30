@@ -95,3 +95,17 @@ class UNOSignUpForm(UserCreationForm):
             raise ValidationError(_('You can not use this email address.'))
 
         return email
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['police_station'].queryset = PoliceStation.objects.none()
+
+        if 'district' in self.data:
+            try:
+                district_id = int(self.data.get('district'))
+                self.fields['police_station'].queryset = PoliceStation.objects.filter(district_id=district_id).order_by('police_station')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty Police_station queryset
+        elif self.instance.pk:
+            self.fields['police_station'].queryset = self.instance.district.police_station_set.order_by('police_station')
+

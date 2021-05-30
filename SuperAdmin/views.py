@@ -443,3 +443,11 @@ def uno_view(request, pk):
         'uno': uno
     }
     return render(request, 'SuperAdmin/Uno/partial_uno_view.html', context=context)
+
+
+def load_police(request):
+    district_id = request.GET.get('district')
+    print(district_id)
+    police_station = PoliceStation.objects.filter(district_id=district_id).all()
+    print(police_station)
+    return render(request, 'police_station_dropdown_list_options.html', {'police_station': police_station})

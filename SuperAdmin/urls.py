@@ -38,4 +38,6 @@ urlpatterns = [
     path('<int:pk>/uno/delete/', views.uno_delete, name='uno_delete'),
     path('<int:pk>/uno/view/', views.uno_view, name='uno_view'),
 
+    path('ajax/load-police-station/', views.load_police, name='ajax_load_police_station'),
+
 ]
