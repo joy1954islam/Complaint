@@ -62,12 +62,7 @@ def doctor_home_page(request):
 
 
 def index_page(request):
-    doctor = User.objects.all()
-
-    context = {
-        'doctor': doctor,
-    }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def DoctorProfileSingle(request,pk):
